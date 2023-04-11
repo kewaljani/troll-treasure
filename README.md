@@ -1,5 +1,7 @@
 # Treasure Troll Solution
 
+![demo_AdobeExpress (1)](https://user-images.githubusercontent.com/43229463/225842673-2e5fc60f-a700-4655-afb2-e507699d5a07.gif)
+
 This is a solution for the treasure troll problem, where a troll must navigate a randomly generated map to reach a tower and obtain a golden treasure. The troll can stack blocks to build a staircase and must do so in as few moves as possible.
 
 ## Solution Overview
