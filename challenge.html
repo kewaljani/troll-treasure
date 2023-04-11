@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Treasure Hunter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        body {
+            margin: 0 auto;
+        }
+
+        #field {
+            float: left;
+            margin: 0 20px 0 0;
+        }
+
+        #panel {
+            float: left;
+            width: 500px;
+        }
+
+        #algorithm {
+            width: 500px;
+            height: 300px;
+            font-size: 11px;
+        }
+
+        .slider, .slider .mark {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        .slider {
+            position: relative;
+            display: inline-block;
+            height: 12px;
+            margin: 5px 15px;
+            border: 1px solid #666;
+        }
+
+        .slider .mark {
+            position: absolute;
+            top: -9px;
+            width: 17px;
+            height: 29px;
+            border: 1px solid #ccc;
+            background: rgba(233, 233, 233, .8);
+            cursor: pointer;
+        }
+
+        .slider .mark:hover {
+            border: 1px solid #999;
+        }
+
+        #delayWrap {
+            margin: 10px 0;
+        }
+
+        * {
+            vertical-align: top;
+        }
+
+        input {
+            width: 60px;
+        }
+
+        #progress {
+            display: block;
+            border: 1px solid #4d4d4d;
+            margin: 10px 0 0;
+        }
+
+        #trials {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<canvas id="field" width="500" height="500"></canvas>
+
+<h2></h2>
+
+<p><label><input type="checkbox" id="test" checked="checked"/> Testmode (arrow keys to move, space to
+    pickup/drop)</label></p>
+<p><label><input type="checkbox" id="draw" checked="checked"/> Draw</label></p>
+
+<p>Board Width: <input type="text" id="width" value="700"/></p>
+
+<p>
+    <button id="pause">Pause</button>
+</p>
+<div id="trials">
+    <button id="run-1">Run Once</button>
+    <button id="run">Run n Times</button>
+    <div id="runSlider"></div>
+    <input id="numRuns" type="text" value="10"/>
+    <canvas id="progress" width="400" height="18"></canvas>
+</div>
+<div id="delayWrap">
+    Delay:
+    <div id="delaySlider"></div>
+    <input type="text" id="delay"/>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script src="challenge.js"></script>
+<script src="solution.js"></script>
+<script src="Slider.js"></script>
+<script>
+    $('#width').change(function() {
+        $('#field')[0].width = $('#field')[0].height = $('#width').val();
+        game.init();
+    }).change();
+
+    $(document).on('keydown', game.test);
+    $('#test').change(function() {
+        if ($(this).is(':checked')) {
+            $(document).on('keydown', game.test);
+        }
+        else {
+            $(document).off('keydown', game.test);
+        }
+    })
+
+    $('#run-1').click(function() {
+        game.run(1);
+    })
+
+    $('#draw').change(function() {
+        game.noDraw = !$(this).is(':checked');
+    })
+
+    $('#pause').click(game.pause);
+
+    $('#run').click(function() {
+        game.run($('#numRuns').val());
+    })
+
+
+    $('#delay').val(game.getDelay);
+    new Slider('#delay', '#delaySlider', 1, 1000, game.setDelay, 400, true, 1 / 2);
+    new Slider('#numRuns', '#runSlider', 1, 100, function() {
+    }, 200, true);
+
+</script>
+</body>
+
+</html>

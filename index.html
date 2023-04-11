@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Agave Challenge</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	</head>
+	<body style="width:1000px;margin:0 auto;">
+      <h1>Agave Challenge</h1>
+		<p>
+			<b>Summary:</b> Your job is to write the brain of a treasure troll. This troll will start on a randomly generated
+			map with scattered obstacles and stackable blocks. Somewhere on the field, there is a tower, atop which rests a golden
+			treasure. To attain this treasure, your troll must stack blocks and build a staircase. The object is to <b>write a
+			clean and understandable solution that finds the treasure in as few moves as possible.</b>
+		</p>
+		
+		<p>You can learn the game mechanics with the <a href="challenge.html">testing engine</a> (use the arrow keys).
+			The testing engine will automatically pull the file solution.js for automated testing purposes.
+			This will be very helpful later on.</p>
+			
+		<p>
+			To defeat the challenge you must implement the Stacker class. The Stacker class only has one
+			required method, <b>turn</b>. The simulator will call your turn method once each turn,
+			passing in the JSON object currentCell, containing information about the current cell your treasure troll is on, and the four
+			surrounding cells. <a href="solution.js">Example Stacker Class</a>
+		</p>
+		<pre>
+			cell = {
+				left: {type: someValue, level: someValue},
+				up: {type: someValue, level: someValue},
+				right: {type: someValue, level: someValue},
+				down: {type: someValue, level: someValue},
+				type: someValue,
+				level: someValue
+			}
+		</pre>
+		
+		<p>There are three types of tiles on the map. All are traversable except walls.
+		<ul>
+			<li>0 (empty)</li>
+			<li>1 (wall)</li>
+			<li>2 (block)</li>
+			<li>3 (gold)</li>
+		</ul>
+		<p>
+			All tiles also have an associated non-negative integer level (elevation off the ground). Empty cells are always at ground zero.
+			Your troll can only move up or down by one level at a time.
+		</p>
+		
+		<p>Your turn method must then return a string representing one of six possible actions.
+			
+		<ul>
+			<li>"left"</li>
+			<li>"up"</li>
+			<li>"right"</li>
+			<li>"down"</li>
+			<li>"pickup"</li>
+			<li>"drop"</li>
+		</ul>
+		
+		<p>
+			The simulator will only count a turn if the action you specified was legal. So if you try to pickup
+			a non-existent block, it simply won't do anything.
+		</p>
+		
+		<p>You can begin writing your solution in solution.js</p>
+			
+		
+		
+	</body>
+</html>
